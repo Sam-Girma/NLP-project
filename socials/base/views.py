@@ -1,4 +1,7 @@
-from multiprocessing import context
+import warnings
+
+# Suppress specific TensorFlow warning
+warnings.filterwarnings("ignore", category=DeprecationWarning, module="tensorflow")
 from django.shortcuts import render,HttpResponse,redirect,get_object_or_404
 from django.contrib.auth import authenticate, login as auth_login, logout as auth_logout,update_session_auth_hash
 from django.contrib import messages
@@ -10,6 +13,8 @@ from django.contrib.auth import get_user_model
 from django.conf import settings
 from django.views.generic import DetailView,CreateView
 from django.contrib.auth.views import PasswordChangeView
+from keras.models import load_model
+from .utils import recall, precision, f1
 from .models import *
 from django.urls import reverse_lazy,reverse
 from django.views import generic
@@ -19,6 +24,7 @@ from django.http import HttpResponseRedirect
 from django.contrib.auth.decorators import login_required
 from itertools import chain
 import random
+loaded_model = load_model('C:/Users/Admin/Desktop/mlp/NLP-project/socials/base/model.h5',custom_objects={'recall': recall, 'precision': precision, 'f1': f1})
 
 # Create your views here.
 @login_required(login_url='signup')
@@ -51,6 +57,12 @@ def home(request):
         'count_posts': count_posts,
         'suggestion_users': suggestion_users,
     }
+    # Update the context with model predictions
+    for post in all_posts:
+        post.predict_is_hate(loaded_model)
+
+    context['all_posts'] = all_posts  # Update the context with the modified all_posts list
+
     return render(request, "base/home.html", context)
 
 class ShowProfilePageView(DetailView):

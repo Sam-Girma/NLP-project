@@ -7,6 +7,8 @@ from datetime import datetime
 from ckeditor.fields import RichTextField
 from django.urls import reverse
 
+from .utils import preprocess_text_for_model
+
 User = get_user_model()
 
 # Create your models here.
@@ -42,6 +44,23 @@ class Post(models.Model):
     location=models.CharField(max_length=255,default="")
     no_of_likes=models.IntegerField(default=0)
     is_hate = models.BooleanField(default=False)
+
+    def predict_is_hate(self, loaded_model):
+        # Get the text from the caption field
+        text = self.caption
+
+        # Preprocess the text using the new preprocessing function
+        preprocessed_text = preprocess_text_for_model(text)
+
+        # Make predictions using the loaded model
+        prediction = loaded_model.predict(preprocessed_text)
+
+
+        # Assuming your model predicts a binary outcome (0 or 1)
+        is_hate = prediction[0] > 0.5
+
+        # Update the is_hate field in the model
+        self.is_hate = is_hate
 
     def __str__(self):
         return self.title + " | " + str(self.author)
