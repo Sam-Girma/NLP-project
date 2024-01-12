@@ -28,3 +28,13 @@ The hate speech detection model predicts whether a given post contains hate spee
 1. Integrate the provided code into your Django project.
 2. Ensure the hate speech detection model is loaded during application startup.
 3. Utilize the `predict_is_hate` method in your views to predict hate speech for each post.
+
+```python
+for post in all_posts:
+    post.predict_is_hate(loaded_model)
+```
+## Dependencies
+
+- Django
+- NLTK
+- Keras
