@@ -1,5 +1,16 @@
 # Afaan Oromo Hate Speech Detection (NLP Project) 🚫🗣️
 
+## Members Information
+
+| Name             | ID          |
+|------------------|-------------|
+| Liban Abduba     | UGR/3781/12 |
+| Endale Yohannes  | UGR/7379/12 |
+| Habib Gemechu    | UGR/4012/12 |
+| Samuel Girma     | UGR/6303/12 |
+| Jabir Esmael     | UGR/3314/12 |
+
+
 ## Introduction 📝
 This project aims to detect hate speech in Afaan Oromo language using Natural Language Processing (NLP) techniques. The code includes a Django web application with a hate speech detection model implemented in Keras. The hate speech detection model is trained on the "Afaan Oromo Hate Speech Dataset" available in the provided CSV file.
 
@@ -33,19 +44,8 @@ The hate speech detection model predicts whether a given post contains hate spee
 for post in all_posts:
     post.predict_is_hate(loaded_model)
 ```
-## Dependencies
-
+## Dependencies 🚀
 - Django
 - NLTK
 - Keras
 
-🚀
-## Members Information
-
-| Name             | ID          |
-|------------------|-------------|
-| Liban Abduba     | UGR/3781/12 |
-| Endale Yohannes  | UGR/7379/12 |
-| Habib Gemechu    | UGR/4012/12 |
-| Samuel Girma     | UGR/6303/12 |
-| Jabir Esmael     | UGR/3314/12 |
