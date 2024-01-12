@@ -69,12 +69,4 @@ def preprocess_text(text):
     text = remove_non_alphanumeric_words(text)
     return text
 
-def preprocess_text_for_model(text):
-    # Additional preprocessing steps specific to the model input
-    preprocessed_text = preprocess_text(text)
 
-    # Tokenize and pad the sequence
-    text_sequence = tokenizer.texts_to_sequences([preprocessed_text])
-    padded_sequence = pad_sequences(text_sequence, maxlen=591)
-
-    return padded_sequence

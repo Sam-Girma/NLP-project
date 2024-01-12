@@ -8,7 +8,7 @@ This project aims to detect hate speech in Afaan Oromo language using Natural La
 2. Ensure the necessary NLTK resources are downloaded by running `nltk.download('punkt')`.
 3. Load the hate speech detection model from the provided path using Keras' `load_model` function:
     ```python
-    loaded_model = load_model('C:/Users/Admin/Desktop/mlp/NLP-project/socials/base/model.h5', custom_objects={'recall': recall, 'precision': precision, 'f1': f1})
+    loaded_model = load_model('NLP-project/socials/base/model.h5', custom_objects={'recall': recall, 'precision': precision, 'f1': f1})
 
 ## Text Preprocessing ✨
 
@@ -40,3 +40,12 @@ for post in all_posts:
 - Keras
 
 🚀
+## Members Information
+
+| Name             | ID          |
+|------------------|-------------|
+| Liban Abduba     | UGR/3781/12 |
+| Endale Yohannes  | UGR/7379/12 |
+| Habib Gemechu    | UGR/4012/12 |
+| Samuel Girma     | UGR/6303/12 |
+| Jabir Esmael     | UGR/3314/12 |
