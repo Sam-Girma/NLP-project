@@ -38,3 +38,5 @@ for post in all_posts:
 - Django
 - NLTK
 - Keras
+
+🚀
