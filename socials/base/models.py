@@ -48,12 +48,14 @@ class Post(models.Model):
     def predict_is_hate(self, loaded_model):
         # Get the text from the caption field
         text = self.caption
+        print("Original Text:", text)
 
         # Preprocess the text using the new preprocessing function
         preprocessed_text = preprocess_text_for_model(text)
 
         # Make predictions using the loaded model
         prediction = loaded_model.predict(preprocessed_text)
+        print("Prediction:", prediction)
 
 
         # Assuming your model predicts a binary outcome (0 or 1)

@@ -1,7 +1,7 @@
 # yourapp/utils.py
 
 import re
-
+import pandas as pd
 import nltk
 from keras.src.utils import pad_sequences
 from keras.preprocessing.text import Tokenizer
@@ -10,6 +10,16 @@ from keras.preprocessing.text import Tokenizer
 nltk.download('punkt')
 
 import keras.backend as K
+
+data = pd.read_csv("C:/Users/Admin/Downloads/Afaan Oromo Hate Speech Dataset.csv")
+X_train = data['Posts']
+tokenizer = Tokenizer()
+tokenizer.fit_on_texts(X_train)
+
+def remove_html_tags(text):
+    # Remove HTML tags using regex
+    clean_text = re.sub('<.*?>', '', text)
+    return clean_text
 
 def recall(y_true, y_pred):
     true_positives = K.sum(K.round(K.clip(y_true * y_pred, 0, 1)))
@@ -52,6 +62,8 @@ def remove_stopwords(raw_text):
     return text
 
 def preprocess_text(text):
+    # Remove HTML tags
+    text = remove_html_tags(text)
     text = remove_noise_symbols(text)
     text = remove_stopwords(text)
     text = remove_non_alphanumeric_words(text)
@@ -60,10 +72,9 @@ def preprocess_text(text):
 def preprocess_text_for_model(text):
     # Additional preprocessing steps specific to the model input
     preprocessed_text = preprocess_text(text)
-    tokenizer = Tokenizer()
 
     # Tokenize and pad the sequence
     text_sequence = tokenizer.texts_to_sequences([preprocessed_text])
-    padded_sequence = pad_sequences(text_sequence, maxlen=591, padding='post')
+    padded_sequence = pad_sequences(text_sequence, maxlen=591)
 
     return padded_sequence
